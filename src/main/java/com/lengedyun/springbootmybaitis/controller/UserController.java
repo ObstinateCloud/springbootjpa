@@ -25,16 +25,19 @@ public class UserController {
 
     @GetMapping("/update")
     public void update(UserEntity userEntity){
+        System.out.println(userEntity.toString());
         userServiceI.update(userEntity);
     }
 
     @GetMapping("/delete")
     public void delete(UserEntity userEntity){
+        System.out.println(userEntity.toString());
         userServiceI.delete(userEntity);
     }
 
     @GetMapping("/getAll")
     public List<UserEntity> getAll(){
+
         return userServiceI.getAll();
     }
 
