@@ -22,3 +22,8 @@ spring:
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
   # stripped before adding them to the entity manager)
       properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+  thymeleaf:
+    cache: false # Enable template caching.
+    encoding: UTF-8 # Template files encoding.
+    mode: HTML5 # Template mode to be applied to templates. See also StandardTemplateModeHandlers.
+    servlet.content-type: text/html # Content-Type value written to HTTP responses.

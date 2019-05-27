@@ -3,13 +3,13 @@ package com.lengedyun.springbootmybaitis.controller;
 import com.lengedyun.springbootmybaitis.entity.UserEntity;
 import com.lengedyun.springbootmybaitis.service.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
-@RestController
+@Controller
 @RequestMapping("userController")
 public class UserController {
 
@@ -29,16 +29,19 @@ public class UserController {
         userServiceI.update(userEntity);
     }
 
-    @GetMapping("/delete")
-    public void delete(UserEntity userEntity){
-        System.out.println(userEntity.toString());
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id){
+        System.out.println(id);
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(id);
         userServiceI.delete(userEntity);
+        return "redirect:/userController/getAll/";
     }
 
-    @GetMapping("/getAll")
-    public List<UserEntity> getAll(){
-
-        return userServiceI.getAll();
+    @RequestMapping("/getAll")
+    public String getAll(ModelMap map){
+        map.addAttribute("userList",  userServiceI.getAll());
+        return "userList";
     }
 
 }
