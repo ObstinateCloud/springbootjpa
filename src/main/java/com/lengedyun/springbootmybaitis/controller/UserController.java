@@ -5,9 +5,9 @@ import com.lengedyun.springbootmybaitis.service.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("userController")
@@ -16,21 +16,37 @@ public class UserController {
     @Autowired
     private UserServiceI userServiceI;
 
-    @GetMapping("/add")
-    public void add(UserEntity userEntity){
-        System.out.println("add");
-        userServiceI.add(userEntity);
-
+    @GetMapping("/goAddUser")
+    public String goAddUser(ModelMap modelMap) {
+        modelMap.addAttribute("user", new UserEntity());
+        modelMap.addAttribute("action", "doAddUser");
+        return "userForm";
     }
 
-    @GetMapping("/update")
-    public void update(UserEntity userEntity){
+    @PostMapping("/doAddUser")
+    public String doAddUser(@ModelAttribute UserEntity userEntity) {
+        System.out.println(userEntity.toString());
+        userServiceI.add(userEntity);
+        return "redirect:/userController/getAll/";
+    }
+
+    @GetMapping("/goUpdateUser/{id}")
+    public String goUpdateUser(@PathVariable Integer id , ModelMap modelMap) {
+        modelMap.addAttribute("action","doUpdateUser");
+        Optional<UserEntity> userEntities = userServiceI.getUserById(id);
+        modelMap.addAttribute("user",userEntities.get());
+        return "userForm";
+    }
+
+    @PostMapping("/doUpdateUser")
+    public String doUpdateUser(UserEntity userEntity) {
         System.out.println(userEntity.toString());
         userServiceI.update(userEntity);
+        return "redirect:/userController/getAll";
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id){
+    public String delete(@PathVariable Integer id) {
         System.out.println(id);
         UserEntity userEntity = new UserEntity();
         userEntity.setId(id);
@@ -39,8 +55,8 @@ public class UserController {
     }
 
     @RequestMapping("/getAll")
-    public String getAll(ModelMap map){
-        map.addAttribute("userList",  userServiceI.getAll());
+    public String getAll(ModelMap map) {
+        map.addAttribute("userList", userServiceI.getAll());
         return "userList";
     }
 
