@@ -7,15 +7,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Date;
 
-@Entity(name = "user")
+@Entity(name = "t_user")
 @Data
 @ToString
-public class UserEntity {
+public class UserEntity extends BaseEntity{
 
-    @Id
-    @GeneratedValue
-    private int id;
 
     @Column(name = "user_name")
     private String userName;
@@ -25,5 +23,8 @@ public class UserEntity {
 
     @Column(name = "age")
     private int age;
+
+    @Column
+    private Date birth;
 
 }

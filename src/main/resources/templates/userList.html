@@ -6,30 +6,49 @@
 </head>
 <body>
 <div>
-    <div><a href="/userController/goAddUser/">新增</a></div>
-<table class="table table-hover table-condensed" border="1px">
-    <legend>
-        <strong>用户列表</strong>
-    </legend>
-    <thead>
-    <tr>
-        <th>用户编号</th>
-        <th>名称</th>
-        <th>年龄</th>
-        <th>密码</th>
-        <th>管理</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user : ${userList}">
-        <th scope="row" th:text="${user.id}"></th>
-        <td><a th:href="@{/userController/goUpdateUser/{id}(id=${user.id})}" th:text="${user.userName}"></a></td>
-        <td th:text="${user.age}"></td>
-        <td th:text="${user.password}"></td>
-        <td><a class="btn btn-danger" th:href="@{/userController/delete/{id}(id=${user.id})}">删除</a></td>
-    </tr>
-    </tbody>
-</table>
+    <form th:action="@{/userController/getAll}" method="post">
+    <div><input type="text" id="userName" placeholder="请输入用户名">
+        &nbsp;<input type="number" id="age" placeholder="请输入年龄">&nbsp;<button id="queryUser" onclick="queryUser()">查询
+        </button>
+    </div>
+    </form>
+    <table class="table table-hover table-condensed" border="1px">
+        <legend>
+            <strong>用户列表</strong>&nbsp;<a href="/userController/goAddUser/">新增</a>
+        </legend>
+        <thead>
+        <tr>
+            <th>用户编号</th>
+            <th>名称</th>
+            <th>年龄</th>
+            <th>密码</th>
+            <th>生日</th>
+            <th>管理</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${userList}">
+            <th scope="row" th:text="${user.id}"></th>
+            <td><a th:href="@{/userController/goUpdateUser/{id}(id=${user.id})}" th:text="${user.userName}"></a></td>
+            <td th:text="${user.age}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${#dates.format(user.birth, 'yyyy-MM-dd')}"></td>
+            <td><a class="btn btn-danger" th:href="@{/userController/delete/{id}(id=${user.id})}">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
+<script>
+    window.onload = function (ev) {
+
+    }
+
+    function queryUser() {
+        var userName = document.getElementById("userName").value;
+        console.log(userName);
+        var age = document.getElementById("age").value;
+        console.log(age);
+    }
+</script>

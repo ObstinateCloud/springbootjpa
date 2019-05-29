@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/goUpdateUser/{id}")
-    public String goUpdateUser(@PathVariable Integer id , ModelMap modelMap) {
+    public String goUpdateUser(@PathVariable String id , ModelMap modelMap) {
         modelMap.addAttribute("action","doUpdateUser");
         Optional<UserEntity> userEntities = userServiceI.getUserById(id);
         modelMap.addAttribute("user",userEntities.get());
@@ -46,7 +47,7 @@ public class UserController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id) {
+    public String delete(@PathVariable String id) {
         System.out.println(id);
         UserEntity userEntity = new UserEntity();
         userEntity.setId(id);
@@ -56,7 +57,9 @@ public class UserController {
 
     @RequestMapping("/getAll")
     public String getAll(ModelMap map) {
-        map.addAttribute("userList", userServiceI.getAll());
+        List<UserEntity> userEntities = userServiceI.getAll();
+        System.out.println(userEntities);
+        map.addAttribute("userList", userEntities);
         return "userList";
     }
 

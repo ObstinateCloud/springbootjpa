@@ -17,5 +17,9 @@ public interface UserServiceI {
 
     public List<UserEntity> getAll();
 
-    public Optional<UserEntity> getUserById(Integer id);
+    public Optional<UserEntity> getUserById(String id);
+
+    public UserEntity findByUserName(String userName);
+
+    public UserEntity findByAge(Integer age);
 }
