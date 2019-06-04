@@ -27,3 +27,5 @@ spring:
     encoding: UTF-8 # Template files encoding.
     mode: HTML5 # Template mode to be applied to templates. See also StandardTemplateModeHandlers.
     servlet.content-type: text/html # Content-Type value written to HTTP responses.
+  mvc:
+    static-path-pattern: /static/**

@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>userList</title>
+    <script type="text/javascript" th:src="@{/static/js/jquery-3.3.1.min.js}"></script>
 </head>
 <body>
 <div>
-    <form th:action="@{/userController/getAll}" method="post">
-    <div><input type="text" id="userName" placeholder="请输入用户名">
-        &nbsp;<input type="number" id="age" placeholder="请输入年龄">&nbsp;<button id="queryUser" onclick="queryUser()">查询
-        </button>
+    <div><input type="text" id="userName" name="userName" placeholder="请输入用户名">
+        &nbsp;<input type="number" id="age" name="age" placeholder="请输入年龄">
+        &nbsp;<input type="button" value="查询" onclick="queryUser()">
     </div>
-    </form>
     <table class="table table-hover table-condensed" border="1px">
         <legend>
             <strong>用户列表</strong>&nbsp;<a href="/userController/goAddUser/">新增</a>
@@ -41,14 +40,31 @@
 </body>
 </html>
 <script>
-    window.onload = function (ev) {
+    $(function () {
 
-    }
+    })
 
     function queryUser() {
         var userName = document.getElementById("userName").value;
-        console.log(userName);
         var age = document.getElementById("age").value;
-        console.log(age);
+        var postData = new Object();
+        if(age != ''){
+            postData.age = age;
+        }
+        if(userName!= ''){
+            postData.userName = userName;
+        }
+        $.ajax({
+            url:'/userController/getAllQuery',
+            data:postData,
+            type:'get',
+            success:function (data) {
+                console.log(data)
+            },
+            error:function () {
+
+            }
+        })
     }
+
 </script>

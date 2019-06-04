@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,8 +35,20 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public List<UserEntity> getAll() {
-        return (List<UserEntity>) userRepo.findAll();
+    public List<UserEntity> getAll(UserEntity userEntity) {
+        if(userEntity!=null){
+            ExampleMatcher matcher = ExampleMatcher.matching();
+            if(!StringUtils.isEmpty(userEntity.getUserName())){
+                matcher.withMatcher("userName",ExampleMatcher.GenericPropertyMatchers.startsWith());
+            }
+            if(!StringUtils.isEmpty(userEntity.getAge())){
+                matcher.withMatcher("age",ExampleMatcher.GenericPropertyMatchers.contains());
+            }
+
+            Example<UserEntity> example = Example.of(userEntity,matcher);
+            return userRepo.findAll(example);
+        }
+        return userRepo.findAll();
     }
 
     @Override

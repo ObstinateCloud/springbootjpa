@@ -57,10 +57,19 @@ public class UserController {
 
     @RequestMapping("/getAll")
     public String getAll(ModelMap map) {
-        List<UserEntity> userEntities = userServiceI.getAll();
+        List<UserEntity> userEntities = userServiceI.getAll(null);
         System.out.println(userEntities);
         map.addAttribute("userList", userEntities);
         return "userList";
+    }
+
+    @RequestMapping("/getAllQuery")
+    @ResponseBody
+    public List<UserEntity> getAllQuery(ModelMap map,@ModelAttribute UserEntity userEntity) {
+        List<UserEntity> userEntities = userServiceI.getAll(userEntity);
+//        System.out.println(userEntities);
+//        map.addAttribute("userList", userEntities);
+        return userEntities;
     }
 
 }

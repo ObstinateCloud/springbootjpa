@@ -15,7 +15,7 @@ public interface UserServiceI {
 
     public void delete(UserEntity userEntity);
 
-    public List<UserEntity> getAll();
+    public List<UserEntity> getAll(UserEntity userEntity);
 
     public Optional<UserEntity> getUserById(String id);
 
