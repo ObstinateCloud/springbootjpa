@@ -1,5 +1,6 @@
 package com.lengedyun.springbootmybaitis.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.lengedyun.springbootmybaitis.entity.UserEntity;
 import com.lengedyun.springbootmybaitis.service.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +70,7 @@ public class UserController {
         List<UserEntity> userEntities = userServiceI.getAll(userEntity);
 //        System.out.println(userEntities);
 //        map.addAttribute("userList", userEntities);
+        String jsonObject = JSONObject.toJSONStringWithDateFormat(userEntities,"yyyy-MM-dd HH:mm:ss");
         return userEntities;
     }
 

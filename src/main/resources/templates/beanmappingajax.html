@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SpringMvcBean映射测试 Ajax</title>
+    <script type="text/javascript" th:src="@{/static/js/jquery-3.3.1.min.js}"></script>
+</head>
+<body>
+<h2>ajax提交</h2>
+<input id="submit" type="button" value="提交" onclick="ajaxSubmit()">
+</body>
+<script>
+    function ajaxSubmit() {
+        $.ajax({
+            url: '/beanMappingController/ajaxSubmit',
+            type: 'POST',
+            data: {
+                "pName": 'pName',
+                "pAge": 45,
+                "hobby":'hobby1,hobby2',
+                "directSon.sName": 'directSonName',
+                "directSon.sAge": 22,
+                "sons[0].sName": 'son1Name',
+                "sons[0].sAge": 15,
+                "sons[1].sName": 'son2Name',
+                "sons[1].sAge": 12,
+                "friends[fName]": 'fName',
+                "friends[lName]": 'lName',
+            },
+            success: function (data) {
+                console.log(data)
+            },
+            error: function () {
+
+            },
+        })
+    }
+</script>
+</html>

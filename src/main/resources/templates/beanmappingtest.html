@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SpringMvcBean映射测试</title>
+    <script type="text/javascript" th:src="@{/static/js/jquery-3.3.1.min.js}"></script>
+</head>
+<body>
+<h2>form表单提交</h2>
+<div>
+<form id="beanMapping" action="/beanMappingController/formSubmit" method="post">
+    父名称:<input id="pName" name="pName" type="text"></br>
+    父年龄:<input id="pAge" name="pAge" type="text"></br>
+    爱好:<input id="hobby1" name="hobby" type="checkbox" value="hobby1">学习<input id="hobby2" name="hobby" type="checkbox" value="hobby1">看书<br>
+    <hr>
+    <h3>家庭成员</h3>
+    嫡长子:嫡长子名字：<input type="text" name="directSon.sName" id="directSonName">嫡长子年龄：<input type="text" name="directSon.sAge" id="directSonAge"><br>
+    庶子1:庶子名字：<input type="text" name="sons[0].sName" id="sons1Name">庶子年龄：<input type="text" name="sons[0].sAge" id="sons1Age"><br>
+    庶子2:庶子名字：<input type="text" name="sons[1].sName" id="sons2Name">庶子年龄：<input type="text" name="sons[1].sAge" id="sons2Age"><br>
+    <hr>
+    <h3>社会关系</h3>
+    朋友:名字：<input type="text" name="friends[fName]" id="friedName"><br>
+    领导:名字：<input type="text" name="friends[lName]" id="leaderName"><br>
+    <hr>
+    <input id="submit" type="submit" value="form提交"><br>
+</form>
+    <br>
+    <input id="ajaxSubmit" type="button" value="ajax提交" onclick="ajaxSubmit()"><br>
+</div>
+</body>
+<script>
+    function ajaxSubmit() {
+        $.ajax({
+            url: '/beanMappingController/ajaxSubmit',
+            type: 'POST',
+            data: {
+                "pName": 'pName',
+                "pAge": 45,
+                "hobby":'hobby1,hobby2',
+                "directSon.sName": 'directSonName',
+                "directSon.sAge": 22,
+                "sons[0].sName": 'son1Name',
+                "sons[0].sAge": 15,
+                "sons[1].sName": 'son2Name',
+                "sons[1].sAge": 12,
+                "friends[fName]": 'fName',
+                "friends[lName]": 'lName',
+            },
+            success: function (data) {
+                console.log(data)
+            },
+            error: function () {
+
+            },
+        })
+    }
+</script>
+</html>
