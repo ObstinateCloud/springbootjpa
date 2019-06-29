@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class MyAspect {
+public class LoginAspect {
 
     @Pointcut("execution(public * com.lengedyun.springbootmybaitis.controller.AspectController.login*(..)) && @annotation(com.lengedyun.springbootmybaitis.annotation.LoginCheck)")
     public void loginAuth() {

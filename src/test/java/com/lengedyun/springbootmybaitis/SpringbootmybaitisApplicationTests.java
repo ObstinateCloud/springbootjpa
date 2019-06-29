@@ -1,5 +1,6 @@
 package com.lengedyun.springbootmybaitis;
 
+import com.lengedyun.springbootmybaitis.service.LogRecordService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,20 @@ public class SpringbootmybaitisApplicationTests {
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
 
+    @Autowired
+    private LogRecordService logRecordService;
+
     @Test
     public void contextLoads() {
 
         redisTemplate.opsForValue().set("name","zhangjy");
         Object object = redisTemplate.opsForValue().get("name");
         System.out.println(object);
+    }
+
+    @Test
+    public void aopTest() {
+       logRecordService.recordLog("zjy",23);
     }
 
 }
