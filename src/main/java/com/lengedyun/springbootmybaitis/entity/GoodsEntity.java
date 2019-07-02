@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author zjy
@@ -14,16 +15,14 @@ import javax.persistence.Id;
  * @date 2019/7/1 16:53
  */
 @Data
-@Entity(name="goods")
+@Entity
+@Table(name = "goods")
 public class GoodsEntity {
 
     @Id
-    @Column(name = "goods_id")
     private Integer goodsId;
 
-    @Column(name = "goods_name")
     private String goodsName;
 
-    @Column(name = "goods_type")
     private Integer goodsType;
 }
