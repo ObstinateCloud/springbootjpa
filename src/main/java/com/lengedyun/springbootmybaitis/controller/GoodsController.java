@@ -1,4 +1,4 @@
-package com.lengedyun.springbootmybaitis.sharding_jdbc;
+package com.lengedyun.springbootmybaitis.controller;
 
 import com.dangdang.ddframe.rdb.sharding.keygen.KeyGenerator;
 import com.lengedyun.springbootmybaitis.dao.GoodsRepo;
