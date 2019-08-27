@@ -1,4 +1,4 @@
-package com.lengedyun.springbootmybaitis;
+package com.lengedyun.springbootjpa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -13,15 +13,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableConfigurationProperties
-public class SpringbootmybaitisApplication extends SpringBootServletInitializer {
+public class SpringbootjpaApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         System.out.println("main method");
-        SpringApplication.run(SpringbootmybaitisApplication.class, args);
+        SpringApplication.run(SpringbootjpaApplication.class, args);
     }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(SpringbootmybaitisApplication.class);
+        return application.sources(SpringbootjpaApplication.class);
     }
 }

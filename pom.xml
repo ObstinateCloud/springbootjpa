@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.lengedyun</groupId>
-    <artifactId>springbootmybatis</artifactId>
+    <artifactId>springbootjpa</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>springbootmybatis</name>

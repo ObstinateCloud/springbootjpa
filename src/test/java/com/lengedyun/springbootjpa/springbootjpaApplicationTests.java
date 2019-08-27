@@ -1,6 +1,6 @@
-package com.lengedyun.springbootmybaitis;
+package com.lengedyun.springbootjpa;
 
-import com.lengedyun.springbootmybaitis.service.LogRecordService;
+import com.lengedyun.springbootjpa.service.LogRecordService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 //webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT 解决测试类中无法启动websocket的问题 在测试中真实启tomcat
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class SpringbootmybaitisApplicationTests {
+public class springbootjpaApplicationTests {
 
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
@@ -29,7 +29,7 @@ public class SpringbootmybaitisApplicationTests {
 
     @Test
     public void aopTest() {
-       logRecordService.recordLog("zjy",23);
+        logRecordService.recordLog("zjy",23);
     }
 
 }
